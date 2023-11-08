@@ -1,25 +1,27 @@
+
+
+const tasks = require('./tasks-array');
+
 const { Router }  = require('express');
 
 const router = Router();
 
-const tasks = [
-    {id: 1, isCompleted: false, description: 'Limpiar los vidrios'},
-    {id: 2, isCompleted: false, description: 'Cocinar el almuerzo'},
-    {id: 3, isCompleted: true, description: 'Regar las plantas'},
-    {id: 4, isCompleted: false, description: 'Hacer ejercicio'},
-];
-
-router.get('/tasks', function (req, res) {
+router.get('/', (req, res) => {
     res.json(tasks);
 });   
 
-router.get('/tasks/:id', function (req, res) {
-    const task = tasks.find((item) => item.id === req.params.id)
+router.get('/:id', (req, res) => {
+    const taskId = req.params.id;
+    const task = tasks.find((task) => task.id == taskId);
     
-    res.json(task);
+    if (task) {
+        res.status(200).json(task)
+    } else {
+        res.status(404).json({mensaje: 'no se encontro la tarea solicitada'})
+    }
 });
 
-router.get('/tasks/filter', function (req, res) {
+router.get('/filter', function (req, res) {
     const filtered = req.query.completed;
 
     if (filtered) {
