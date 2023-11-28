@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
     
     tasks.push(nuevoObjeto);
     
-    res.send('Tarea agregada');
+    res.json(nuevoObjeto);
 });
 
 // Servicio para borrar tareas
@@ -53,9 +53,9 @@ router.delete('/:id', (req, res) => {
 
     if (indice !== -1) {
         tasks.splice(indice, 1);
-        res.send('Tarea eliminada');
+        res.json({ mensaje: 'Tarea eliminada' });
     } else {
-        res.status(404).send('Tarea no encontrada');
+        res.status(404).json({ mensaje: 'Tarea no encontrada '});
     }
     
 });
@@ -68,9 +68,9 @@ router.put('/update/:id', (req, res) => {
     if (task) {
         task.isCompleted = req.body.isCompleted;
         task.description = req.body.description;
-        res.send('Tarea actualizada');
+        res.json(task);
     } else {
-        res.status(404).send('Tarea no encontrada');
+        res.status(404).json({ mensaje: 'Tarea no encontrada' });
     }
     
 });

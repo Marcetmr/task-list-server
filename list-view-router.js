@@ -67,7 +67,7 @@ router.get('/:id', (req, res) => {
     if (task) {
         res.status(200).json(task)
     } else {
-        res.status(404).json({mensaje: 'no se encontro la tarea solicitada'})
+        res.status(404).json({ mensaje: 'no se encontro la tarea solicitada' })
     }
 });
 
