@@ -6,7 +6,34 @@ const tasks = require('./tasks-array');
 
 const { Router }  = require('express');
 
+const jwt = require('jsonwebtoken');
+
+const dotenv = require('dotenv');
+
 const router = Router();
+
+dotenv.config();
+
+const SECRET_KEY = process.env.SECRET_KEY;
+
+// Middleware para validar token
+
+router.use((req, res, next) => {
+    const token = req.headers.authorization;
+    
+    if (!token) {
+        res.status(401).json({ error: 'Unauthorized' });
+    } else {
+        jwt.verify(token, SECRET_KEY, (err, payloadDecoded) => {
+            if (err) {
+                res.status(401).json({ error: 'Unauthorized' });
+            }
+        });
+    }
+
+    next();
+
+});
 
 // Middleware de validación de parámetros
 

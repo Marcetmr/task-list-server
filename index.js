@@ -8,6 +8,8 @@ const listRoutes = require('./list-view-router');
 
 const taskRoutes = require('./list-edit-router');
 
+const authRoutes = require('./auth-router');
+
 const app = express();
 
 // Middleware para analizar el cuerpo de la solicitud en formato JSON
@@ -33,6 +35,8 @@ const PORT = 3000;
 app.use('/tasks', listRoutes);
 
 app.use('/tasks', taskRoutes);
+
+app.use('/login', authRoutes);
 
 // Inicio del servidor
 

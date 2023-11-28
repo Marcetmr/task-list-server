@@ -1,6 +1,6 @@
 
 
-// Pseudo base de datos
+// Pseudo base de datos de tareas
 
 const tasks = [
     {id: 1, isCompleted: false, description: 'Limpiar los vidrios'},
